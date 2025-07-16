@@ -1,0 +1,19 @@
+# Ignore cache/logs/temp files
+*.log
+*.tmp
+*.bak
+*.env
+
+# Ignore vendor (if using Composer)
+vendor/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+
+# Ignore node modules (if using frontend tools)
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
