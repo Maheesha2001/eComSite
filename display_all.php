@@ -32,7 +32,7 @@
         </nav>
         <div class="inline-row">
     <p>Welcome guest</p>
-    <p>Login</p>
+    <a class="nav-link" href="./users_area/user_login.php">Login</a>
 </div>
 
         <div class="main-content">

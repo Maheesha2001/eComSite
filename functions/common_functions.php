@@ -346,6 +346,29 @@
         $result = mysqli_query($conn, $cart_query);
         while($row = mysqli_fetch_array($result)){
             $product_id = $row['product_id'];
+            $product_qty =  $row['quantity'];
+            $select_products = "SELECT * FROM products WHERE product_id='$product_id'";
+            $result_products = mysqli_query($conn, $select_products);
+            while($row_product_price = mysqli_fetch_array($result_products)){
+                $product_price = $row_product_price['product_price'];
+                $total_price += ($product_price * $product_qty);
+            }
+        }
+        echo $total_price;
+    }
+    
+?>
+
+<!-- // total proce function
+    function total_cart_price(){
+        global $conn;
+        $get_ip_add = visitorIP();
+        $total_price = 0;
+        $cart_query = "SELECT * FROM cart_details WHERE ip_address='$get_ip_add'";
+        $result = mysqli_query($conn, $cart_query);
+        while($row = mysqli_fetch_array($result)){
+            $product_id = $row['product_id'];
+            $product_qty =  $row['quantity'];
             $select_products = "SELECT * FROM products WHERE product_id='$product_id'";
             $result_products = mysqli_query($conn, $select_products);
             while($row_product_price = mysqli_fetch_array($result_products)){
@@ -355,6 +378,4 @@
             }
         }
         echo $total_price;
-    }
-    
-?>
+    } -->
