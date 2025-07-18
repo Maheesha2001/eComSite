@@ -1,5 +1,5 @@
    <?php
-        include ('./include/connect.php');
+         include ('./include/connect.php');
         include('./functions/common_functions.php');
    ?>
    <!DOCTYPE html>     
@@ -19,7 +19,7 @@
                     <a href="index.php" style="display:flex; align-items:center;"><img src="images/logo.png" alt="Logo" class="logo"></a>
                     <a href="index.php">Home</a>
                     <a href="display_all.php">Products</a>
-                    <a href="#">Register</a>
+                    <a href="users_area/user_registration.php">Register</a>
                     <a href="#">Contact</a>
                     <a href="cart.php" style="font-size:1.2em;"><i class="fa fa-shopping-cart"></i><sup><?php cart_items();?></sup></a>
                     <a href="#">Total Price <?php total_cart_price();?>/-</a>            

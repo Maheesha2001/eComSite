@@ -1,3 +1,7 @@
+<?php
+        include(__DIR__ . '/../include/connect.php');
+        include(__DIR__ . '/../functions/common_functions.php');
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +42,15 @@
                     <button type="submit" class="btn btn-theme-green" name="login">Login</button>
                 </div>
                 <div class="text-center">
-                    <span>Don't have an account? <a href="user_registration.php" class="theme-green-link">Register</a></span>
+                    <span>Don't have an account? <a href="<?php 
+                                                                if ($_SERVER['REQUEST_URI'] === '/eComSite/checkout.php') {
+                                                                    echo '/eComSite/users_area/user_registration.php';
+                                                                } else {
+                                                                    echo 'user_registration.php';
+                                                                }
+                                                            ?>" 
+                            class="theme-green-link">Register</a>
+                        </span>
                 </div>
             </form>
         </div>
@@ -46,3 +58,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+// user login
+
+if (isset($_POST['login'])) {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+    $user_ip = visitorIP();
+
+    // Check if user exists
+    $check_query = "SELECT * FROM user_table WHERE user_name=?";
+    $stmt = mysqli_prepare($conn, $check_query);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row_count = mysqli_num_rows($result);
+
+    if ($row_count > 0) {
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row['user_password'])) {
+            $_SESSION['username'] = $username;
+
+            // Check if user has items in cart
+            $select_cart_items = "SELECT * FROM cart_details WHERE ip_address='$user_ip'";
+            $result_cart = mysqli_query($conn, $select_cart_items);
+            $row_count_cart = mysqli_num_rows($result_cart);
+
+            if ($row_count == 1 && $row_count_cart == 0) {
+                $_SESSION['username'] = $username;
+                echo "<script>alert('Login successful')</script>";
+                echo "<script>window.open('profile.php','_self')</script>";
+            } else {
+                $_SESSION['username'] = $username;
+                echo "<script>alert('Login successful')</script>";
+                echo "<script>window.open('payment.php','_self')</script>";
+            }
+        } else {
+            echo "<script>alert('Invalid Credentials')</script>";
+        }
+    } else {
+        echo "<script>alert('Invalid Credentials')</script>";
+    }
+}
+?>

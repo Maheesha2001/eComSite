@@ -1,5 +1,6 @@
 <?php
-    include('./include/connect.php');
+    
+    //include('../include/connect.php');
 
     // getting products
         function getproducts() {

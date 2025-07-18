@@ -1,5 +1,5 @@
 <?php
-        include(__DIR__ . '/../include/connect.php');
+        include ('../include/connect.php');
         include('../functions/common_functions.php');
    ?>
 <!DOCTYPE html>
@@ -112,6 +112,18 @@ if (isset($_POST['register'])) {
                 echo "<div class='alert alert-danger text-center'>Registration failed. Please try again.</div>";
             }
         }
+    }
+
+    // selecting cart items
+    $select_cart_items="SELECT * FROM `cart_details` WHERE ip_address='$user_ip'";
+    $result_cart=mysqli_query($conn,$select_cart_items);
+    $rows_count=mysqli_num_rows($result_cart);
+    if($rows_count>0){
+        $_SESSION['username']=$username;
+        echo "<script>alert('You have items in your cart')</script>";
+        echo "<script>window.open('/eComSite/checkout.php','_self')</script>";
+    }else{
+        echo "<script>window.open('../index.php','_self')</script>";
     }
 }
 ?>
