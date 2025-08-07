@@ -1,6 +1,7 @@
 <?php
         include ('./include/connect.php');
         include('./functions/common_functions.php');
+        session_start();
    ?>
    <!DOCTYPE html>     
     <head>
@@ -31,8 +32,21 @@
         cart();
         ?>
         <div class="inline-row">
-    <p>Welcome guest</p>
-    <a class="nav-link" href="./users_area/user_login.php">Login</a>
+
+  
+    <?php
+    if(!isset($_SESSION['username'])){
+        echo " <a class='nav-link' href='#'>Welcome Guest</a>";
+    } else {
+        echo " <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a>";
+    }
+    if(!isset($_SESSION['username'])){
+        echo " <a class='nav-link' href='./users_area/user_login.php'>Login</a>";
+    } else {
+        echo " <a class='nav-link' href='./users_area/user_logout.php'>Logout</a>";
+    }
+    
+    ?>      
 </div>
        <!-- cart table -->
         <form action="" method="post">

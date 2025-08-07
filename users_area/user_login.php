@@ -1,6 +1,8 @@
 <?php
         include(__DIR__ . '/../include/connect.php');
         include(__DIR__ . '/../functions/common_functions.php');
+        @session_start();
+         
    ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,11 +90,11 @@ if (isset($_POST['login'])) {
             if ($row_count == 1 && $row_count_cart == 0) {
                 $_SESSION['username'] = $username;
                 echo "<script>alert('Login successful')</script>";
-                echo "<script>window.open('profile.php','_self')</script>";
+                echo "<script>window.open('/eComSite/users_area/profile.php','_self')</script>";
             } else {
                 $_SESSION['username'] = $username;
                 echo "<script>alert('Login successful')</script>";
-                echo "<script>window.open('payment.php','_self')</script>";
+                echo "<script>window.open('/eComSite/payment.php','_self')</script>";
             }
         } else {
             echo "<script>alert('Invalid Credentials')</script>";

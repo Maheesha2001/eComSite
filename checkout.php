@@ -1,6 +1,6 @@
 <?php
         include ('./include/connect.php');
-        
+        session_start();
    ?>
    <!DOCTYPE html>     
     <head>
@@ -31,8 +31,22 @@
         </nav>
         
         <div class="inline-row">
-    <p>Welcome guest</p>
-    <p>Login</p>
+   
+
+    <?php
+    if(!isset($_SESSION['username'])){
+        echo " <a class='nav-link' href='#'>Welcome Guest</a>";
+    } else {
+        echo " <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a>";
+    }
+    if(!isset($_SESSION['username'])){
+        echo " <a class='nav-link' href='./users_area/user_login.php'>Login</a>";
+    } else {
+        echo " <a class='nav-link' href='./users_area/user_logout.php'>Logout</a>";
+    }
+    
+    ?>
+   
 </div>
         <div class="main-content">
             <div class="products-grid">

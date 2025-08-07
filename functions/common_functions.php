@@ -304,7 +304,7 @@
                 echo "<script>alert('This item is already present inside cart');</script>";
                 echo "<script>window.open('index.php','_self');</script>";
             } else {
-                $insert_query = "INSERT INTO cart_details (product_id, ip_address, quantity) VALUES ($get_product_id, '$get_ip_add', 0)";
+                $insert_query = "INSERT INTO cart_details (product_id, ip_address, quantity) VALUES ($get_product_id, '$get_ip_add', 1)";
                 $result = mysqli_query($conn, $insert_query);
                 echo "<script>alert('Item is added to cart');</script>";
                 echo "<script>window.open('index.php','_self');</script>";
