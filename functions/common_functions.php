@@ -3,7 +3,7 @@
     //include('../include/connect.php');
 
     // getting products
-        function getproducts() {
+    function getproducts() {
             global $conn; // Make sure your connection variable is $conn
             //isset conditions
             if(!isset($_GET['category'])){
@@ -34,7 +34,8 @@
                     }
                 }
             }
-        }
+    }
+    
 
         //get all products
         function get_all_products(){
@@ -267,9 +268,9 @@
                         </div>";
                 }
             }   
+            }
         }
-    }
-    }
+     }
         
     // get ip address function
     function visitorIP() {  
@@ -286,7 +287,7 @@
                   $vIP = $_SERVER['REMOTE_ADDR'];  
           }  
           return $vIP;  
-        }  
+    }  
 
     // cart function
     function cart() {
@@ -358,6 +359,38 @@
         echo $total_price;
     }
     
+    function get_user_order_details(){
+        global $conn;
+        $username = $_SESSION['username'];
+        $get_details = "SELECT * FROM user_table WHERE user_name='$username'";
+        $result_query = mysqli_query($conn, $get_details);
+        while($row = mysqli_fetch_array($result_query)){
+            $user_id = $row['user_id'];
+            if(!isset($_GET['edit_account'])){
+                if(!isset($_GET['my_orders'])){
+                    if(!isset($_GET['delete_account'])){
+                        $get_orders="SELECT * FROM user_orders WHERE user_id='$user_id' AND order_status='pending'";
+                        $result_orders_query = mysqli_query($conn, $get_orders);
+                        $row_count=mysqli_num_rows($result_orders_query);
+                        if($row_count==0){
+                            echo "<h3 class='text-danger text-center'>No orders yet</h3>";
+                        }else{
+                            echo "<div class='alert alert-info text-center mb-4'>
+                                                <i class='fas fa-info-circle me-2'></i>
+                                                <strong>You have $row_count pending order(s)</strong>
+                                              </div>
+                                              <div class='card-header bg-primary text-white'>
+                            <h5 class='mb-0'>
+                                <i class'fas fa-clock me-2'></i>Order Status
+                            </h5>
+                        </div>
+                        <div class='card-body p-4'>";
+                        }
+                    }
+                }
+            }
+        }
+    }
 ?>
 
 <!-- // total proce function
