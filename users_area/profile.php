@@ -172,6 +172,9 @@
                             if(isset($_GET['my_orders'])){
                                 include('user_orders.php');
                             }
+                            if(isset($_GET['delete_account'])){
+                                include('delete_account.php');
+                            }
                             ?>
                             <!-- <?php
                             if(isset($_SESSION['username'])) {
@@ -222,11 +225,11 @@
                             }
                             ?> -->
                             
-                            <div class="text-center mt-4">
-                                <a href="order_details.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-list me-2"></i>View All Orders
-                                </a>
-                            </div>
+                                <!-- <div class="text-center mt-4">
+                                    <a href="order_details.php" class="btn btn-outline-primary">
+                                        <i class="fas fa-list me-2"></i>View All Orders
+                                    </a>
+                                </div> -->
                         </div>
                     </div>
 
