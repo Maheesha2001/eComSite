@@ -12,22 +12,22 @@ if(isset($_POST['delete_account'])) {
             $user_data = mysqli_fetch_array($result_user);
             $user_id = $user_data['user_id'];
 
-            // Delete user's payments (before deleting orders!)
-            $delete_payments = "DELETE FROM user_payments WHERE order_id IN (SELECT order_id FROM user_orders WHERE user_id=$user_id)";
-            mysqli_query($conn, $delete_payments);
+            // // Delete user's payments (before deleting orders!)
+            // $delete_payments = "DELETE FROM user_payments WHERE order_id IN (SELECT order_id FROM user_orders WHERE user_id=$user_id)";
+            // mysqli_query($conn, $delete_payments);
 
-            // Delete user's orders
-            $delete_orders = "DELETE FROM user_orders WHERE user_id=$user_id";
-            mysqli_query($conn, $delete_orders);
+            // // Delete user's orders
+            // $delete_orders = "DELETE FROM user_orders WHERE user_id=$user_id";
+            // mysqli_query($conn, $delete_orders);
 
-            // Delete user's cart
-            $user_ip = $user_data['user_ip'];
-            $delete_cart = "DELETE FROM cart_details WHERE ip_address='$user_ip'";
-            mysqli_query($conn, $delete_cart);
+            // // Delete user's cart
+            // $user_ip = $user_data['user_ip'];
+            // $delete_cart = "DELETE FROM cart_details WHERE ip_address='$user_ip'";
+            // mysqli_query($conn, $delete_cart);
 
-            // Delete pending orders
-            $delete_pending = "DELETE FROM orders_pending WHERE user_id=$user_id";
-            mysqli_query($conn, $delete_pending);
+            // // Delete pending orders
+            // $delete_pending = "DELETE FROM orders_pending WHERE user_id=$user_id";
+            // mysqli_query($conn, $delete_pending);
 
             // Delete profile image
             if(!empty($user_data['user_image']) && file_exists("user_images/" . $user_data['user_image'])) {
